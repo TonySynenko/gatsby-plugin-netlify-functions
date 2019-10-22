@@ -79,12 +79,13 @@ exports.onCreateDevServer = (
     }
     const isBase64 = req.body && !(req.headers[`content-type`] || ``).match(/text|application/);
 
+    const body = JSON.stringify(req.body);
     const lambdaRequest = {
       path: req.path,
       httpMethod: req.method,
       queryStringParameters: req.query || {},
       headers: req.headers,
-      body: isBase64 ? base64.encode(req.body) : req.body,
+      body: isBase64 ? base64.encode(body) : body,
       isBase64Encoded: isBase64,
     };
 
